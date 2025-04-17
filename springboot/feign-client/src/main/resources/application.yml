@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: feign-client
+server:
+  port: 9981
+feign-data:
+  url: "http://localhost:9983"
+weather:
+    url: "https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst"
+    key: "1234"
