@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-front-service-bjh
+spec:
+  type: LoadBalancer
+  selector:
+    app: web-front-service-bjh
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 9005
+# type: LoadBalancer -> CLB 생성

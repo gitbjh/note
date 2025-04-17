@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: edge-service-bjh
+spec:
+  selector:
+    matchLabels:
+      app: edge-service-bjh
+  template:
+    metadata:
+      labels:
+        app: edge-service-bjh
+    spec:
+      containers:
+        - name: edge-service-bjh
+          image: 879381276515.dkr.ecr.ap-northeast-2.amazonaws.com/edge-service:latest
+          imagePullPolicy: Always
+          lifecycle:
+            preStop:
+              exec:
+                command: [ "sh", "-c", "sleep 5" ]
+          resources:
+            requests:
+                cpu: "250m"
+                memory: "512Mi"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+          ports:
+          - containerPort: 9000
+          env: 
+            - name: CATALOG_SERVICE_URL
+              value: http://catalog-service:80
+            - name: ORDER_SERVICE_URL
+              value: http://order-service:80
+            - name: AUTH_SERVICE_URL
+              value: http://auth-service:80
